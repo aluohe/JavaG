@@ -51,6 +51,7 @@
  - [frank-lam git地址](https://github.com/frank-lam/fullstack-tutorial)
  - [3y git地址](https://github.com/ZhongFuCheng3y/3y)
  - [3y 码云地址](https://gitee.com/zhongfucheng/Java3y)
+ - [3y 体系](https://github.com/ZhongFuCheng3y/JavaSystem)
  - [JavaGuide git地址](https://github.com/Snailclimb/awesome-java)
 
 
