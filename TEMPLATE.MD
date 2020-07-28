@@ -1,4 +1,4 @@
-# 腾讯云开发者平台 aluohe_test
+# 腾讯云开发者平台 aluohe
 
 > 技术赋能，助力开发
 
@@ -48,7 +48,10 @@
 - 修复若干已知 bug
 
 ### 学习地址
-https://github.com/frank-lam/fullstack-tutorial
-https://github.com/ZhongFuCheng3y/3y
-https://gitee.com/zhongfucheng/Java3y
-https://github.com/Snailclimb/awesome-java
+ -[frank-lam git地址](https://github.com/frank-lam/fullstack-tutorial)
+ -[3y git地址](https://github.com/ZhongFuCheng3y/3y)
+ -[3y 码云地址](https://gitee.com/zhongfucheng/Java3y)
+ -[JavaGuide git地址](https://github.com/Snailclimb/awesome-java)
+
+
+
