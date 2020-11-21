@@ -1,10 +1,4 @@
-# Headline
+# aluohe个人文档管理
 
 > An awesome project.
-
-[操作系统][1]
-
-
-
-[1]:./操作系统.md
 
