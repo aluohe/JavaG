@@ -10,4 +10,4 @@
 [Prod-aluohe-docs](https://github.com/aluohe/aluohe-docs)
 [docs](https://aluohe.github.io/aluohe-docs/#/README)
 
-![logo](https://aluohe.oss-cn-beijing.aliyuncs.com/aluohe-doc/psbNR6JU662.jpg)
+![logo](./_media/psbNR6JU662.jpg)
