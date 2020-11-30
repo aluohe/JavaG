@@ -32,6 +32,9 @@
 class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
+        
+        socketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));
+        socketChannel.pipeline().addLast(new StringDecoder());
         socketChannel.pipeline().addLast(new TimeServerHandler());
     }
 }
@@ -105,6 +108,8 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
+                            socketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));
+                            socketChannel.pipeline().addLast(new StringDecoder());
                             socketChannel.pipeline().addLast(new TimeClientHandler());
                         }
                     });
@@ -212,4 +217,28 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
 ##### Netty 解决TCP 粘包/拆包方案
 
-105
+> 为了解决TCP 粘包/拆包导致的半包读写问题，netty默认提供了多种编解码器用于处理半包
+>
+> eg：`LineBasedFrameDecoder`、`StringDecoder`
+
+###### `LineBasedFrameDecoder`、`StringDecoder`原理分析
+
+- LineBasedFreameDecoder 一次遍历ByteBuf中的刻度字节直到遇到 "\n" 或者 "\r\n",以换行符为结束符（结束位置），从可读索引到结束位置区间的字节就组成一行数据。他是以换行符为结束标志的解码器，支持写道结束符或者不携带结束符两种解码方式，同时支持配置单行最大长度。如果连续读取到最大长度后仍然没有发现换行符，就会抛出异常，同时忽略掉之前读到的异常码流
+- StringDecoder 功能简单，就是将接收到的对象转换成字符串，然后继续调用后面的handler。
+- LineBasedFreameDecoder +StringDecoder 组合就是按行切换的文本解码器，它被设计用来支持TCP的粘包和拆包
+
+##### 分隔符和定长解码器
+
+> TCP以流的方式进行数据传输，上层应用协议为了对消息进行区分，一般会采用如下4种方式
+
+- 消息长度固定，累计读取到长度综合为定长LEN的报文后，就认为读取到了一个完整的消息；将计数器置位，重新开始读取下一个数据报
+- 将回车换行符作为消息结束符，例如 FTP协议，这种方式在文本西医中应用比较广泛
+- 将特殊的分隔符作为消息的结束标志，回车换行符就是一种特殊的结束分隔符
+- 通过在消息头中定义长度字段来标识消息的总长度
+
+> netty 对上述四种解码应用做了统一抽象
+>
+> eg：`DelimiterBasedFrameDecoder` 可以自动完成以分隔符做结束标志的信息的解码
+>
+> `FixedLengthFrameDecoder` 可以完成定长消息的解码
+
