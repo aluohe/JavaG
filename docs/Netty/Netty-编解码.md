@@ -108,3 +108,5 @@ Jboss Marshalling  更多是在jboss内部使用，应用范围有限
 ![image-20201130175137795](../_media/image-20201130175137795.png)
 
 ![image-20201130175159004](../_media/image-20201130175159004.png)
+
+149
