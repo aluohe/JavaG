@@ -109,4 +109,11 @@ Jboss Marshalling  更多是在jboss内部使用，应用范围有限
 
 ![image-20201130175159004](../_media/image-20201130175159004.png)
 
-149
+##### protobuf 使用注意事项
+
+> ProtobufDecoder 仅负责解码，不支持读半包，因此 在ProtobufDecoder前面，需要能够处理读半包的解码器
+
+- 使用Netty提供的ProtobufVarint32FrameDecoder ，它可以处理半包消息
+- 继承Netty提供的通用半包解码器LengthFieldBasedFreameDecoder
+- 继承ByteToMessageDecoder类，自己处理半包消息
+
