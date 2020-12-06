@@ -318,3 +318,7 @@ protected boolean runAllTasks(long timeoutNanos) {
 #### 处理长业务
 
 > 自己实现非IO线程池处理系统业务，当异步线程处理完后，可以主动触发数据回写，例如调用 writeAndFlush，只要你持有 ctx 的引用即可。
+
+
+
+![img](../_media/105235_KuTM_438393.png)
